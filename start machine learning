@@ -19,3 +19,15 @@ train_model.fit(x,y)
 print("making prediction :")
 print(x.head())
 print(train_model.predict(x.head()))
+
+#to find out error
+from sklearn.metrics import mean_absolute_error
+predict_price=train_model.predict(x)
+mean_absolute_error(y,predict_price)
+
+#validation
+#from sklearn.model_selection import train_test_split for train test split
+train_x, val_x, train_y, val_y = train_test_split(x,y,random_state=0)
+train_model.fit(train_x,train_y)
+prediction_test_price= train_model.predict(val_x)
+print(mean_absolute_error(val_y,prediction_test_price))
