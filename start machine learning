@@ -1,0 +1,21 @@
+import pandas as pd
+import numpy as np
+from sklearn.tree import DecisionTreeRegressor
+train=pd.read_csv('train.csv')
+train.columns
+#to select one column
+y=train.SalePrice 
+
+#features for taking necessary columns
+train_features=['OverallQual', 'GrLivArea', 'GarageCars', 'GarageArea']
+x= train[train_features]
+x=x.dropna(axis=0)
+x.describe()
+x.head()
+#define model, specify number of random stateto ensure same result each statestate run 
+train_model=DecisionTreeRegressor(random_state=1)
+#fit model
+train_model.fit(x,y)
+print("making prediction :")
+print(x.head())
+print(train_model.predict(x.head()))
