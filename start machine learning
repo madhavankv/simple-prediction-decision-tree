@@ -32,3 +32,22 @@ train_model.fit(train_x,train_y)
 prediction_test_price= train_model.predict(val_x)
 print(mean_absolute_error(val_y,prediction_test_price))
 
+#optimising by identifying the leaf nodes numbers to avoid underfitting,overfitting
+def get_mae(max_leaf_nodes,train_x,val_x,train_y,val_y):
+    model=DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=1)
+    model.fit(train_x,train_y)
+    pred_val=model.predict(val_x)
+    mae=mean_absolute_error(val_y,pred_val)
+    return (mae)
+    
+
+for max_leaf_nodes in[5,50,500,5000]:
+    my_mae=get_mae(max_leaf_nodes,train_x,val_x,train_y,val_y)
+    print("max leaf nodes %d  \t\t mean absolute error %d" %(max_leaf_nodes,my_mae))
+    
+#The random forest uses many trees, and it makes a prediction by averaging the predictions of each component tree
+from sklearn.ensemble import RandomForestRegressor
+forest_model=RandomForestRegressor(random_state=1)
+forest_model.fit(train_x,train_y)
+pred_forest=forest_model.predict(val_x)
+print(mean_absolute_error(val_y,pred_forest))
