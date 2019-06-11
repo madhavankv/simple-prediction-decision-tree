@@ -31,3 +31,4 @@ train_x, val_x, train_y, val_y = train_test_split(x,y,random_state=0)
 train_model.fit(train_x,train_y)
 prediction_test_price= train_model.predict(val_x)
 print(mean_absolute_error(val_y,prediction_test_price))
+
